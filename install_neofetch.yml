@@ -1,0 +1,17 @@
+---
+- name: Neofetch Installation
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update repositories index
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
+  
+  tasks:
+    - name: Install the neofetch apt package
+      ansible.builtin.apt:
+        name: neofetch
+        state: latest
+  

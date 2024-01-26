@@ -1,0 +1,38 @@
+---
+- name: Bootstrap servers
+  hosts: all
+  become: true
+  remote_user: ubuntu
+  
+  vars:
+    ansible_name: ansible_usr
+    ansible_ssh_public_key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
+
+  pre_tasks:
+    - name: Install OS updates
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Create Ansible user
+      ansible.builtin.user:
+        name: "{{ ansible_name }}"
+
+    - name: Copy SSH public key for Ansible user
+      ansible.builtin.authorized_key:
+        user: "{{ ansible_name }}"
+        key: "{{ ansible_ssh_public_key }}"
+
+    - name: Add Ansible user to sudo group
+      ansible.builtin.user:
+        name: "{{ ansible_name }}"
+        groups: sudo
+        append: yes
+
+    - name: Configure sudo privileges for {{ ansible_name }}
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/{{ ansible_name }}
+        content: "{{ ansible_name }} ALL=(ALL:ALL) NOPASSWD:ALL"
+        owner: root
+        group: root
+        mode: 0440

@@ -1,0 +1,23 @@
+---
+- name: Asciiquarium Installation
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update repositories index
+      ansible.builtin.apt:
+        update_cache: true
+      changed_when: false
+  
+    - name: Add the asciiquarium repository index
+      ansible.builtin.apt_repository:
+        repo: ppa:ytvwld/asciiquarium
+        state: present
+
+  tasks:
+    - name: Install the asciiquarium package
+      ansible.builtin.apt:
+        name: asciiquarium
+        state: latest
+
+  
