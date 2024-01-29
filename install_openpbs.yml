@@ -73,7 +73,7 @@
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_SERVER='
-        line: 'PBS_SERVER=<main_host_name>'
+        line: 'PBS_SERVER=host'
 
     - name: Modify file permissions for SUID privilege
       file:
