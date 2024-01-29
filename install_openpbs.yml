@@ -36,6 +36,7 @@
         - automake
         - g++
         - libcjson-dev
+      changed_when: false
 
     - name: Clone or pull OpenPBS repository
       git:
