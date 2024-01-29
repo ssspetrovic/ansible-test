@@ -41,8 +41,8 @@
     - name: Clone or pull OpenPBS repository
       git:
         repo: https://github.com/openpbs/openpbs.git
-        dest: /path/to/openpbs/repository  # Replace with the correct path
-        version: main  # or specify the branch/tag you want
+        dest: "~/openpbs"
+        version: main
         update: yes
 
     - name: Run autoconfigure script
