@@ -1,0 +1,84 @@
+---
+- name: Install OpenPBS
+  hosts: all
+  become: true
+  vars:
+    pbs_prefix: /opt/pbs
+
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - gcc
+        - make
+        - libtool
+        - libhwloc-dev
+        - libx11-dev
+        - libxt-dev
+        - libedit-dev
+        - libical-dev
+        - ncurses-dev
+        - perl
+        - postgresql-server-dev-all
+        - postgresql-contrib
+        - python3-dev
+        - tcl-dev
+        - tk-dev
+        - swig
+        - libexpat-dev
+        - libssl-dev
+        - libxext-dev
+        - libxft-dev
+        - autoconf
+        - automake
+        - g++
+        - libcjson-dev
+
+    - name: Clone OpenPBS repository
+      git:
+        repo: https://github.com/openpbs/pbspro.git
+        dest: "{{ pbs_prefix }}/src/openpbs"
+        version: master
+
+    - name: Run autoconfigure script
+      shell: "{{ pbs_prefix }}/src/openpbs/autogen.sh"
+      args:
+        chdir: "{{ pbs_prefix }}/src/openpbs"
+
+    - name: Configure OpenPBS
+      shell: "{{ pbs_prefix }}/src/openpbs/configure --prefix={{ pbs_prefix }}"
+      args:
+        chdir: "{{ pbs_prefix }}/src/openpbs"
+
+    - name: Build OpenPBS
+      make:
+        chdir: "{{ pbs_prefix }}/src/openpbs"
+
+    - name: Install OpenPBS
+      make:
+        chdir: "{{ pbs_prefix }}/src/openpbs"
+        target: install
+
+    - name: Run post-install script
+      shell: "{{ pbs_prefix }}/src/openpbs/libexec/pbs_postinstall"
+
+    - name: Update /etc/pbs.conf
+      lineinfile:
+        path: /etc/pbs.conf
+        regexp: '^PBS_SERVER='
+        line: 'PBS_SERVER=<main_host_name>'
+
+    - name: Modify file permissions for SUID privilege
+      file:
+        path: "{{ pbs_prefix }}/sbin/{{ item }}"
+        mode: '4755'
+      loop:
+        - pbs_iff
+        - pbs_rcp
+
+    - name: Start OpenPBS services
+      shell: "{{ pbs_prefix }}/init.d/pbs start"
+
