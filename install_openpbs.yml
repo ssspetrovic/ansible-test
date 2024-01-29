@@ -37,11 +37,12 @@
         - g++
         - libcjson-dev
 
-    - name: Clone OpenPBS repository
+    - name: Clone or pull OpenPBS repository
       git:
-        repo: https://github.com/openpbs/pbspro.git
-        dest: "{{ pbs_prefix }}/src/openpbs"
-        version: master
+        repo: https://github.com/openpbs/openpbs.git
+        dest: /path/to/openpbs/repository  # Replace with the correct path
+        version: main  # or specify the branch/tag you want
+        update: yes
 
     - name: Run autoconfigure script
       shell: "{{ pbs_prefix }}/src/openpbs/autogen.sh"
