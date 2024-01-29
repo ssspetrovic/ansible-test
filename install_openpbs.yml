@@ -42,7 +42,7 @@
       git:
         repo: https://github.com/openpbs/openpbs.git
         dest: "~/openpbs"
-        version: main
+        version: master
         update: yes
 
     - name: Run autoconfigure script
@@ -68,7 +68,6 @@
       shell: "{{ pbs_prefix }}/libexec/pbs_postinstall"
       args:
         chdir: "{{ pbs_prefix }}/src/openpbs"
-
 
     - name: Update /etc/pbs.conf
       lineinfile:
