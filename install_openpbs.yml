@@ -63,7 +63,10 @@
         target: install
 
     - name: Run post-install script
-      shell: "{{ pbs_prefix }}/src/openpbs/libexec/pbs_postinstall"
+      shell: "{{ pbs_prefix }}/libexec/pbs_postinstall"
+      args:
+        chdir: "{{ pbs_prefix }}/src/openpbs"
+
 
     - name: Update /etc/pbs.conf
       lineinfile:
