@@ -46,18 +46,18 @@
         update: yes
 
     - name: Run autoconfigure script
-      shell: "{{ pbs_prefix }}/src/openpbs/autogen.sh"
+      shell: "~/openpbs/autogen.sh"
 
     - name: Configure OpenPBS
-      shell: "{{ pbs_prefix }}/src/openpbs/configure --prefix={{ pbs_prefix }} --enable-ptl"
+      shell: "~/openpbs/configure --prefix={{ pbs_prefix }} --enable-ptl"
 
     - name: Build OpenPBS
       make:
-        chdir: "{{ pbs_prefix }}/src/openpbs"
+        chdir: "~/openpbs"
 
     - name: Install OpenPBS
       make:
-        chdir: "{{ pbs_prefix }}/src/openpbs"
+        chdir: "~/openpbs"
         target: install
 
     - name: Run post-install script
