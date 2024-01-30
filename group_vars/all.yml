@@ -2,6 +2,8 @@ server_ip: 192.168.122.213
 compute01_ip: 192.168.122.140
 compute02_ip: 192.168.122.171
 
+remote_user: ansible_cfg
+
 node_type:
   server: server
   compute01: compute
