@@ -112,7 +112,7 @@
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_MOM='
-        line: 'PBS_START_MOM=0'
+        line: 'PBS_START_MOM=1'
 
     - name: Start OpenPBS services
       shell: "/etc/init.d/pbs start"
