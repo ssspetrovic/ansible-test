@@ -5,7 +5,7 @@
   vars:
     pbs_prefix: /opt/pbs
     pbs_repo_dir: /home/{{ remote_user }}/openpbs
-    pbs_server_ip: 192.168.122.200
+    pbs_server_ip: "{{ server_ip }}"
 
   tasks:
     - name: Install dependencies
