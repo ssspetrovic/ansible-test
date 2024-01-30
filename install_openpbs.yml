@@ -4,6 +4,7 @@
   become: true
   vars:
     pbs_prefix: /opt/pbs
+    pbs_repo_dir: ~/openpbs
 
   tasks:
     - name: Install dependencies
@@ -41,27 +42,27 @@
     - name: Clone or pull OpenPBS repository
       git:
         repo: https://github.com/openpbs/openpbs.git
-        dest: "~/openpbs"
+        dest: "{{ pbs_repo_dir }}"
         version: master
         update: yes
 
     - name: Run autoconfigure script
       shell: "./autogen.sh"
       args:
-        chdir: "~/openpbs"
+        chdir: "{{ pbs_repo_dir }}"
 
     - name: Configure OpenPBS
       shell: "./configure --prefix={{ pbs_prefix }} --enable-ptl"
       args:
-        chdir: "~/openpbs"
+        chdir: "{{ pbs_repo_dir }}"
 
     - name: Build OpenPBS
       make:
-        chdir: "~/openpbs"
+        chdir: "{{ pbs_repo_dir }}"
 
     - name: Install OpenPBS
       make:
-        chdir: "~/openpbs"
+        chdir: "{{ pbs_repo_dir }}"
         target: install
 
     - name: Run post-install script
@@ -82,4 +83,7 @@
         - pbs_rcp
 
     - name: Start OpenPBS services
-      shell: "{{ pbs_prefix }}/init.d/pbs start"
+      shell: "/etc/init.d/pbs start"
+
+    - name: Source PBS profile
+      shell: ". /etc/profile.d/pbs.sh"
