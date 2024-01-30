@@ -47,8 +47,6 @@
 
     - name: Run autoconfigure script
       shell: "{{ pbs_prefix }}/src/openpbs/autogen.sh"
-      args:
-        chdir: "{{ pbs_prefix }}/src/openpbs"
 
     - name: Configure OpenPBS
       shell: "{{ pbs_prefix }}/src/openpbs/configure --prefix={{ pbs_prefix }} --enable-ptl"
