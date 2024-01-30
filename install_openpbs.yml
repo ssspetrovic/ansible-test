@@ -46,14 +46,14 @@
         update: yes
 
     - name: Run autoconfigure script
-      shell: "autogen.sh"
+      shell: "./autogen.sh"
       args:
-        chdir: "{{ ansible_env.HOME }}/openpbs"
+        chdir: "~/openpbs"
 
     - name: Configure OpenPBS
-      shell: "configure --prefix={{ pbs_prefix }} --enable-ptl"
+      shell: "./configure --prefix={{ pbs_prefix }} --enable-ptl"
       args:
-        chdir: "{{ ansible_env.HOME }}/openpbs"
+        chdir: "~/openpbs"
 
     - name: Build OpenPBS
       make:
@@ -83,4 +83,3 @@
 
     - name: Start OpenPBS services
       shell: "{{ pbs_prefix }}/init.d/pbs start"
-
