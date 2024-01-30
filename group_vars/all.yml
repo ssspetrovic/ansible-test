@@ -1,6 +1,6 @@
 server_ip: 192.168.122.200
-compute01_ip: 192.168.122.16
-compute02_ip: 192.168.122.139
+compute01_ip: 192.168.122.140
+compute02_ip: 192.168.122.171
 
 node_type:
   server: server
