@@ -1,11 +1,11 @@
-myservers:
+compute_nodes:
   hosts:
-    server01:
+    compute01:
       ansible_host: 192.168.122.16
-    server02:
+    compute02:
       ansible_host: 192.168.122.139
 
-myservernode:
+server_nodes:
   hosts:
     server:
       ansible_host: 192.168.122.200

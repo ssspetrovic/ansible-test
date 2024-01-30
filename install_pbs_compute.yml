@@ -4,7 +4,7 @@
   become: true
   vars:
     pbs_prefix: /opt/pbs
-    pbs_repo_dir: /home/ansible_usr/openpbs
+    pbs_repo_dir: /home/{{ remote_user }}/openpbs
     pbs_server_ip: 192.168.122.200
 
   tasks:
@@ -38,7 +38,6 @@
         - automake
         - g++
         - libcjson-dev
-      changed_when: false
 
     - name: Clone or pull OpenPBS repository
       git:
@@ -94,25 +93,25 @@
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SERVER='
-        line: 'PBS_START_SERVER=0'
+        line: "{{ 'PBS_START_SERVER=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_SERVER=1' }}"
 
     - name: Update PBS_START_SCHED
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SCHED='
-        line: 'PBS_START_SCHED=0'
+        line: "{{ 'PBS_START_SCHED=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_SCHED=1' }}"
 
     - name: Update PBS_START_COMM
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_COMM='
-        line: 'PBS_START_COMM=0'
+        line: "{{ 'PBS_START_COMM=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_COMM=1' }}"
 
     - name: Update PBS_START_MOM
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_MOM='
-        line: 'PBS_START_MOM=1'
+        line: "{{ 'PBS_START_MOM=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_MOM=1' }}"
 
     - name: Start OpenPBS services
       shell: "/etc/init.d/pbs start"

@@ -1,3 +1,8 @@
-host_server_ip: 192.168.122.200
-server01_ip: 192.168.122.16
-server02_ip: 192.168.122.139
+server_ip: 192.168.122.200
+compute01_ip: 192.168.122.16
+compute02_ip: 192.168.122.139
+
+node_type:
+  server: server
+  compute01: compute
+  compute02: compute
