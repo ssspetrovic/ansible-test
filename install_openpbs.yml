@@ -4,7 +4,7 @@
   become: true
   vars:
     pbs_prefix: /opt/pbs
-    pbs_repo_dir: ~/openpbs
+    pbs_repo_dir: /home/ansible_usr/openpbs
 
   tasks:
     - name: Install dependencies
