@@ -93,19 +93,19 @@
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SERVER='
-        line: "{{ 'PBS_START_SERVER=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_SERVER=1' }}"
+        line: "{{ 'PBS_START_SERVER=1' if node_type[inventory_hostname] == 'server' else 'PBS_START_SERVER=0' }}"
 
     - name: Update PBS_START_SCHED
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SCHED='
-        line: "{{ 'PBS_START_SCHED=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_SCHED=1' }}"
+        line: "{{ 'PBS_START_SCHED=1' if node_type[inventory_hostname] == 'server' else 'PBS_START_SCHED=0' }}"
 
     - name: Update PBS_START_COMM
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_COMM='
-        line: "{{ 'PBS_START_COMM=0' if node_type[inventory_hostname] == 'server' else 'PBS_START_COMM=1' }}"
+        line: "{{ 'PBS_START_COMM=1' if node_type[inventory_hostname] == 'server' else 'PBS_START_COMM=0' }}"
 
     - name: Update PBS_START_MOM
       lineinfile:
