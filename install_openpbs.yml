@@ -1,11 +1,11 @@
 ---
 - name: Install OpenPBS
-  hosts: all
+  hosts: myservers
   become: true
   vars:
     pbs_prefix: /opt/pbs
     pbs_repo_dir: /home/ansible_usr/openpbs
-    pbs_server_ip: 
+    pbs_server_ip: 192.168.122.200
 
   tasks:
     - name: Install dependencies
