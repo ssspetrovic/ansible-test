@@ -46,6 +46,7 @@
         dest: "{{ pbs_repo_dir }}"
         version: master
         update: yes
+        force: yes
 
     - name: Run autoconfigure script
       shell: "./autogen.sh"
