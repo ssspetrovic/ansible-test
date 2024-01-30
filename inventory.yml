@@ -4,4 +4,8 @@ myservers:
       ansible_host: 192.168.122.16
     server02:
       ansible_host: 192.168.122.139
-      
+
+myservernode:
+  hosts:
+    server:
+      ansible_host: 192.168.122.200

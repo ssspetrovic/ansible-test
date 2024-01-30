@@ -2,7 +2,7 @@
 
 ---
 - name: Ping Servers
-  hosts: my_servers
+  hosts: all
   gather_facts: false
 
   tasks:
