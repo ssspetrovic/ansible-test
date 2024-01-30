@@ -4,3 +4,8 @@ myservers:
       ansible_host: 192.168.122.16
     server02:
       ansible_host: 192.168.122.139
+
+  vars:
+    host_server_ip: 192.168.122.200
+    server01_ip: 192.168.122.16
+    server01_ip: 192.168.122.139
