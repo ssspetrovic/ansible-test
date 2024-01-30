@@ -89,35 +89,30 @@
         path: /etc/pbs.conf
         regexp: '^PBS_SERVER='
         line: 'PBS_SERVER={{ pbs_server_ip }}'
-      notify: Restart PBS
 
     - name: Update PBS_START_SERVER
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SERVER='
         line: 'PBS_START_SERVER=0'
-      notify: Restart PBS
 
     - name: Update PBS_START_SCHED
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_SCHED='
         line: 'PBS_START_SCHED=0'
-      notify: Restart PBS
 
     - name: Update PBS_START_COMM
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_COMM='
         line: 'PBS_START_COMM=0'
-      notify: Restart PBS
 
     - name: Update PBS_START_MOM
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_START_MOM='
         line: 'PBS_START_MOM=0'
-      notify: Restart PBS
 
     - name: Start OpenPBS services
       shell: "/etc/init.d/pbs start"
