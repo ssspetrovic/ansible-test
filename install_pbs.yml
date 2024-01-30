@@ -1,6 +1,6 @@
 ---
 - name: Install OpenPBS
-  hosts: myservers
+  hosts: all
   become: true
   vars:
     pbs_prefix: /opt/pbs
