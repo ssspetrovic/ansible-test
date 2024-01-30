@@ -51,9 +51,7 @@
         chdir: "{{ pbs_prefix }}/src/openpbs"
 
     - name: Configure OpenPBS
-      shell: "{{ pbs_prefix }}/src/openpbs/configure --prefix={{ pbs_prefix }}"
-      args:
-        chdir: "{{ pbs_prefix }}/src/openpbs"
+      shell: "{{ pbs_prefix }}/src/openpbs/configure --prefix={{ pbs_prefix }} --enable-ptl"
 
     - name: Build OpenPBS
       make:
@@ -66,8 +64,6 @@
 
     - name: Run post-install script
       shell: "{{ pbs_prefix }}/libexec/pbs_postinstall"
-      args:
-        chdir: "{{ pbs_prefix }}/src/openpbs"
 
     - name: Update /etc/pbs.conf
       lineinfile:

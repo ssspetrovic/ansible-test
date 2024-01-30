@@ -36,3 +36,8 @@
         owner: root
         group: root
         mode: 0440
+
+    - name: Set Bash shell for Ansible user
+      ansible.builtin.user:
+        name: "{{ ansible_name }}"
+        shell: /bin/bash
