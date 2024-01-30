@@ -50,6 +50,8 @@
 
     - name: Configure OpenPBS
       shell: "~/openpbs/configure --prefix={{ pbs_prefix }} --enable-ptl"
+      args:
+        chdir: "{{ ansible_env.HOME }}"
 
     - name: Build OpenPBS
       make:
