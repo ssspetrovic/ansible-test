@@ -5,7 +5,7 @@
   vars:
     pbs_prefix: /opt/pbs
     pbs_repo_dir: /home/{{ remote_user }}/openpbs
-    pbs_server_ip: "{{ server_ip }}"
+    pbs_server_hostname: "{{ server_hostname }}"
 
   tasks:
     - name: Install dependencies
@@ -87,7 +87,7 @@
       lineinfile:
         path: /etc/pbs.conf
         regexp: '^PBS_SERVER='
-        line: 'PBS_SERVER={{ pbs_server_ip }}'
+        line: 'PBS_SERVER={{ pbs_server_hostname }}'
 
     - name: Update PBS_START_SERVER
       lineinfile:

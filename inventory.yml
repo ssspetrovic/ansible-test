@@ -1,11 +1,11 @@
 compute_nodes:
   hosts:
     compute01:
-      ansible_host: 192.168.122.140
+      ansible_host: 192.168.122.11
     compute02:
-      ansible_host: 192.168.122.171
+      ansible_host: 192.168.122.143
 
 server_nodes:
   hosts:
     server:
-      ansible_host: 192.168.122.213
+      ansible_host: 192.168.122.60
