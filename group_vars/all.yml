@@ -1,6 +1,7 @@
 server_hostname: server
 
 remote_user: ansible_cfg
+pbs_user: ubuntu
 
 node_type:
   server: server

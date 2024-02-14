@@ -4,7 +4,7 @@
   become: true
   vars:
     pbs_prefix: /opt/pbs
-    pbs_repo_dir: /home/{{ remote_user }}/openpbs
+    pbs_repo_dir: /home/{{ pbs_user }}/openpbs
     pbs_server_hostname: "{{ server_hostname }}"
 
   tasks:
