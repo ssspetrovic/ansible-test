@@ -5,7 +5,6 @@
   remote_user: ubuntu
   
   vars:
-    ansible_name: ansible_usr
     ansible_ssh_public_key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
 
   pre_tasks:
@@ -16,28 +15,28 @@
 
     - name: Create Ansible user
       ansible.builtin.user:
-        name: "{{ ansible_name }}"
+        name: "{{ remote_user }}"
 
     - name: Copy SSH public key for Ansible user
       ansible.builtin.authorized_key:
-        user: "{{ ansible_name }}"
+        user: "{{ remote_user }}"
         key: "{{ ansible_ssh_public_key }}"
 
     - name: Add Ansible user to sudo group
       ansible.builtin.user:
-        name: "{{ ansible_name }}"
+        name: "{{ remote_user }}"
         groups: sudo
         append: yes
 
-    - name: Configure sudo privileges for {{ ansible_name }}
+    - name: Configure sudo privileges for {{ remote_user }}
       ansible.builtin.copy:
-        dest: /etc/sudoers.d/{{ ansible_name }}
-        content: "{{ ansible_name }} ALL=(ALL:ALL) NOPASSWD:ALL"
+        dest: /etc/sudoers.d/{{ remote_user }}
+        content: "{{ remote_user }} ALL=(ALL:ALL) NOPASSWD:ALL"
         owner: root
         group: root
         mode: 0440
 
     - name: Set Bash shell for Ansible user
       ansible.builtin.user:
-        name: "{{ ansible_name }}"
+        name: "{{ remote_user }}"
         shell: /bin/bash
